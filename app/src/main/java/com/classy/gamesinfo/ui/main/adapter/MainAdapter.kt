@@ -1,23 +1,24 @@
 package com.classy.gamesinfo.ui.main.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.classy.gamesinfo.R
+import com.bumptech.glide.Glide
 import com.classy.gamesinfo.data.model.Game
+import com.classy.gamesinfo.databinding.GameLayoutBinding
 import kotlin.collections.ArrayList
+import android.util.Log
 
-//TODO: update game_layout.xml to feature games
 
 class MainAdapter(private val games: ArrayList<Game>) : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
-    class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class DataViewHolder(private val itemBinding: GameLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(game: Game) {
             itemView.apply {
-                //TODO: apply game information (name/pic/etc...)
-                //textViewUserName.text = game.name
+                itemBinding.rowLBLName.text = game.name
+                Log.d("FFFF", "GamesAdapter: ${game.id}")
+                Glide.with(itemBinding.rowIMGImage.context).load("https://images.igdb.com/igdb/image/upload/t_cover_small/" + game.id + ".jpg").into(itemBinding.rowIMGImage)
             }
         }
     }
@@ -28,8 +29,10 @@ class MainAdapter(private val games: ArrayList<Game>) : RecyclerView.Adapter<Mai
 
     override fun getItemCount(): Int = games.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder =
-        DataViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.game_layout, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
+        val itemBinding = GameLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DataViewHolder(itemBinding)
+    }
 
     fun addGames(games: ArrayList<Game>) {
         this.games.apply {

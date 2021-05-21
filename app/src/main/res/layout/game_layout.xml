@@ -22,7 +22,7 @@
         android:paddingEnd="10dp">
 
         <TextView
-            android:id="@+id/row_LBL_alarmNameLabel"
+            android:id="@+id/row_LBL_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -36,37 +36,19 @@
             android:id="@+id/relativeLayout"
             android:layout_width="130dp"
             android:layout_height="match_parent"
-            android:background="@color/teal_200"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/row_LBL_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="20:30"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+            <ImageView
+                android:id="@+id/row_IMG_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
 
         </RelativeLayout>
-
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/row_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:checked="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

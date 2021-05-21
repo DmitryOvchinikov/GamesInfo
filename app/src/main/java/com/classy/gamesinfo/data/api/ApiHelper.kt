@@ -1,6 +1,6 @@
 package com.classy.gamesinfo.data.api
 
-class ApiHelper(private val igdbAPI: IgdbAPI) {
-    suspend fun getAllGames() = igdbAPI.getAllGames("asd")
-    suspend fun authenticate() = igdbAPI.authenticate()
+class ApiHelper(private val igdbService: IgdbService) {
+    suspend fun getAllGames(accessToken: String) = igdbService.getAllGames(accessToken)
+    suspend fun authenticate() = igdbService.authenticate()
 }

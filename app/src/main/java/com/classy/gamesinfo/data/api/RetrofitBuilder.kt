@@ -1,6 +1,5 @@
 package com.classy.gamesinfo.data.api
 
-import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,5 +13,5 @@ object RetrofitBuilder {
             .build()
     }
 
-    val apiService: IgdbAPI = getRetrofit().create(IgdbAPI::class.java)
+    val SERVICE_SERVICE: IgdbService = getRetrofit().create(IgdbService::class.java)
 }
