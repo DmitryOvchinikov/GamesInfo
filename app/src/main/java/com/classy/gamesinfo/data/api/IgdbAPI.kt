@@ -15,7 +15,7 @@ interface IgdbAPI {
 
     //Provides an access token and the number of seconds until the token expires
     @POST("https://id.twitch.tv/oauth2/token?client_id=ihuqs2frs8uml6o6iwi75hl5q5a1iw&client_secret=5ructzjiii51d2noq5r1xxnslhtg3p&grant_type=client_credentials")
-    fun authenticate(): Call<IgdbAccess>
+    suspend fun authenticate(): IgdbAccess
 
     //base url - https://api.igdb.com/v4
     //have to include Client ID and access token in the HEADER of the request
@@ -30,5 +30,5 @@ interface IgdbAPI {
     //Static header with the known client-id, and a dynamic header of the constantly changing authorization token
     @Headers("Client-ID:ihuqs2frs8uml6o6iwi75hl5q5a1iw")
     @GET("games")
-    fun getAllGames(@Header("Authorization") token: String): ArrayList<Game>
+    suspend fun getAllGames(@Header("Authorization") token: String): ArrayList<Game>
 }

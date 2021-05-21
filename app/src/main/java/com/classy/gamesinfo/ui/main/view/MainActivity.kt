@@ -18,10 +18,10 @@ import com.classy.gamesinfo.ui.base.ViewModelFactory
 import com.classy.gamesinfo.ui.main.adapter.MainAdapter
 import com.classy.gamesinfo.ui.main.viewmodel.MainViewModel
 import com.classy.gamesinfo.utils.Status
-import retrofit2.Call
-import retrofit2.awaitResponse
 
-//TODO: create some sort of manager (same kind as AlarmManager) to call API everytime the access token expires
+//TODO: create some sort of manager (same kind as AlarmManager) to call the authentication API everytime the access token expires.
+//TODO: figure out a way to send the access token in the getAllGames Call.
+//TODO: save the IgdbAccess in SP, retrieve when needed for an API call
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,24 +47,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupObservers() {
 
-//        var tokenCall : Call<IgdbAccess>
-//        mainViewModel.authenticate().observe(this, {
-//            it?.let { resource ->
-//                when (resource.status) {
-//                    Status.SUCCESS -> {
-//                        tokenCall = resource.data!!
-//                        var token = tokenCall.execute()
-//                        Log.d("FFFF", "$token oof")
-//                    }
-//                    Status.ERROR -> {
-//                        Log.d("FFFF", it.message.toString())
-//                    }
-//                    Status.LOADING -> {
-//                        Log.d("FFFF", "LOADING")
-//                    }
-//                }
-//            }
-//        })
+        var token : IgdbAccess
+        mainViewModel.authenticate().observe(this, {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        token = resource.data!!
+                        Log.d("FFFF", "authenticate():$token oof")
+                    }
+                    Status.ERROR -> {
+                        Log.d("FFFF", "authenticate(): " + it.message.toString())
+                    }
+                    Status.LOADING -> {
+                        Log.d("FFFF", "authenticate(): LOADING")
+                    }
+                }
+            }
+        })
 
         mainViewModel.getAllGames().observe(this, {
             it?.let { resource ->
@@ -75,16 +74,18 @@ class MainActivity : AppCompatActivity() {
                         resource.data?.let { games ->
                             retrieveList(games)
                         }
+                        Log.d("FFFF", "getAllGames(): SUCCESS")
                     }
                     Status.ERROR -> {
                         viewBinding.mainLSTRecyclerView.visibility = View.VISIBLE
                         viewBinding.mainBARProgressBar.visibility = View.GONE
                         Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                        Log.d("FFFF", it.message.toString())
+                        Log.d("FFFF", "getAllGames(): " + it.message.toString())
                     }
                     Status.LOADING -> {
                         viewBinding.mainBARProgressBar.visibility = View.VISIBLE
                         viewBinding.mainLSTRecyclerView.visibility = View.GONE
+                        Log.d("FFFF", "getAllGames(): LOADING")
                     }
                 }
             }

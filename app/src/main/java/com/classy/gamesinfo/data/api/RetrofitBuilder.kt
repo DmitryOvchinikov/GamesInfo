@@ -10,7 +10,6 @@ object RetrofitBuilder {
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) //Maybe not needed
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
