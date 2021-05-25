@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    private const val BASE_URL = "https://api.igdb.com/v4/"
+    private const val BASE_URL = "https://www.gamespot.com/api/"
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
@@ -13,5 +13,5 @@ object RetrofitBuilder {
             .build()
     }
 
-    val SERVICE_SERVICE: IgdbService = getRetrofit().create(IgdbService::class.java)
+    //val SERVICE_SERVICE: GameSpotService = getRetrofit().create(GameSpotService::class.java)
 }

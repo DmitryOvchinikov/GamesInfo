@@ -35,24 +35,24 @@ class MySharedPreferences private constructor(context: Context) {
         return preferences.getBoolean(key, def)
     }
 
-    fun putIgdbAccess(igdbAccess: IgdbAccess) {
-        val gson = Gson()
-        val accessJson: String = gson.toJson(igdbAccess)
-        preferences.edit().putString(KEYS.TOKEN, accessJson).apply()
-    }
-
-    fun getIgdbAccess(): IgdbAccess {
-        val gson = Gson()
-        var emptyTemp = gson.toJson(IgdbAccess())
-        var igdbAccess = gson.fromJson<IgdbAccess>(
-            preferences.getString(KEYS.TOKEN, emptyTemp),
-            object : TypeToken<IgdbAccess>(){}.type
-        )
-        if (igdbAccess == null) {
-            igdbAccess = IgdbAccess()
-        }
-        return igdbAccess
-    }
+//    fun putIgdbAccess(igdbAccess: IgdbAccess) {
+//        val gson = Gson()
+//        val accessJson: String = gson.toJson(igdbAccess)
+//        preferences.edit().putString(KEYS.TOKEN, accessJson).apply()
+//    }
+//
+//    fun getIgdbAccess(): IgdbAccess {
+//        val gson = Gson()
+//        var emptyTemp = gson.toJson(IgdbAccess())
+//        var igdbAccess = gson.fromJson<IgdbAccess>(
+//            preferences.getString(KEYS.TOKEN, emptyTemp),
+//            object : TypeToken<IgdbAccess>(){}.type
+//        )
+//        if (igdbAccess == null) {
+//            igdbAccess = IgdbAccess()
+//        }
+//        return igdbAccess
+//    }
 
     companion object {
         lateinit var instance: MySharedPreferences

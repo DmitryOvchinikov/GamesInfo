@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_news">
+
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="com.classy.gamesinfo.ui.main.view.fragments.ArticlesFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/navigation_reviews"
+        android:name="com.classy.gamesinfo.ui.main.view.fragments.ReviewsFragment"
+        android:label="@string/title_reviews"
+        tools:layout="@layout/fragment_reviews" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_videos"
+        android:name="com.classy.gamesinfo.ui.main.view.fragments.VideosFragment"
+        android:label="@string/title_videos"
+        tools:layout="@layout/fragment_videos" />
+
+    <fragment
+        android:id="@+id/navigation_games"
+        android:name="com.classy.gamesinfo.ui.main.view.fragments.VideosFragment"
+        android:label="@string/title_games"
+        tools:layout="@layout/fragment_videos" />
+</navigation>

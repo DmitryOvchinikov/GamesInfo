@@ -4,40 +4,40 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.classy.gamesinfo.data.model.gamespot.Game
 import com.classy.gamesinfo.databinding.GameLayoutBinding
 import kotlin.collections.ArrayList
 import android.util.Log
+import com.classy.gamesinfo.data.model.gamespot.Article
 
 
-class MainAdapter(private val games: ArrayList<Game>) : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
+class ArticlesAdapter(private val articles: ArrayList<Article>) : RecyclerView.Adapter<ArticlesAdapter.DataViewHolder>() {
 
     class DataViewHolder(private val itemBinding: GameLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bind(game: Game) {
+        fun bind(article: Article) {
             itemView.apply {
-                itemBinding.rowLBLName.text = game.name
-                Log.d("FFFF", "GamesAdapter: ${game.id}")
-                Glide.with(itemBinding.rowIMGImage.context).load("https://images.igdb.com/igdb/image/upload/t_cover_small/" + game.id + ".jpg").into(itemBinding.rowIMGImage)
+                itemBinding.rowLBLName.text = article.body
+                Log.d("FFFF", "GamesAdapter: ${article.id}")
+                //Glide.with(itemBinding.rowIMGImage.context).load("https://images.igdb.com/igdb/image/upload/t_cover_small/" + article.id + ".jpg").into(itemBinding.rowIMGImage)
             }
         }
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.bind(games[position])
+        holder.bind(articles[position])
     }
 
-    override fun getItemCount(): Int = games.size
+    override fun getItemCount(): Int = articles.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val itemBinding = GameLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DataViewHolder(itemBinding)
     }
 
-    fun addGames(games: ArrayList<Game>) {
-        this.games.apply {
+    fun addArticles(articles: ArrayList<Article>) {
+        this.articles.apply {
             clear()
-            addAll(games)
+            addAll(articles)
         }
     }
 
