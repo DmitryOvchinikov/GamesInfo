@@ -53,7 +53,7 @@ class ArticlesFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        articlesViewModel.getRecentArticles().observe(viewLifecycleOwner, {
+        articlesViewModel.getRecentArticles("json", "publish_date:desc", 10, 0).observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -80,9 +80,10 @@ class ArticlesFragment : Fragment() {
     }
 
     private fun retrieveList(articles: ArticlesJsonAPI) {
-        articlesAdapter.apply{
+        articlesAdapter.apply {
             addArticles(articles.results as ArrayList<Result>)
             notifyDataSetChanged()
+
         }
     }
 

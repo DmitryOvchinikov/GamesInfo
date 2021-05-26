@@ -12,10 +12,10 @@ import com.classy.gamesinfo.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 //TODO: Implement different ViewTypes into the recyclerView to differentiate between the News/Reviews/Videos/Events and Games.
-//TODO: Change the API calls and the general hierarchy of classes to support the new setup
-//TODO: Implement onClick in the recyclerView
 //TODO: To get no duplicate loading issues (e.g. pressing home, than coming back to the activity) with koin and DI: https://stackoverflow.com/questions/56289929/how-to-use-koin-in-multiple-module
 //TODO: Save the State of the fragments so the application won't call the API everytime the user switches a fragment
+//TODO: Find a way to scroll to the position of the expanded section from inside the ArticlesAdapter
+//TODO: Implement InfiniteScroll and the API Call whenever it scrolls to the end
 
 class MainActivity : AppCompatActivity() {
 

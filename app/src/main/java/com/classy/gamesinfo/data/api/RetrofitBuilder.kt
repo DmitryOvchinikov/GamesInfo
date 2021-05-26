@@ -3,6 +3,8 @@ package com.classy.gamesinfo.data.api
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+//TODO: check if I still need this garbage
+
 object RetrofitBuilder {
     private const val BASE_URL = "https://www.gamespot.com/api/"
 

@@ -12,5 +12,6 @@ data class Result(
     val publish_date: String,
     val site_detail_url: String,
     val title: String,
-    val update_date: String
+    val update_date: String,
+    var expanded: Boolean = false
 )

@@ -69,4 +69,7 @@ dependencies {
 
     //Koin
     implementation "io.insert-koin:koin-android:3.0.2"
+
+    //InfiniteScroll
+    implementation 'com.github.pwittchen:infinitescroll:0.0.3'
 }

@@ -8,10 +8,10 @@ import kotlinx.coroutines.Dispatchers
 
 class ArticlesViewModel(private val articlesRepository: ArticlesRepository): ViewModel() {
 
-    fun getRecentArticles() = liveData(Dispatchers.IO) {
+    fun getRecentArticles(format: String, sort: String, limit: Int, offset: Int) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = articlesRepository.getRecentArticles()))
+            emit(Resource.success(data = articlesRepository.getRecentArticles(format, sort, limit, offset)))
         } catch (exception: Exception) {
             emit (Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
