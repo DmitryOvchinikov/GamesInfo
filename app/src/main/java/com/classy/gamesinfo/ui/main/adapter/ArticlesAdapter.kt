@@ -1,24 +1,34 @@
 package com.classy.gamesinfo.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.classy.gamesinfo.R
+import com.classy.gamesinfo.data.model.gamespot.Result
 import com.classy.gamesinfo.databinding.GameLayoutBinding
-import kotlin.collections.ArrayList
-import android.util.Log
-import com.classy.gamesinfo.data.model.gamespot.Article
 
 
-class ArticlesAdapter(private val articles: ArrayList<Article>) : RecyclerView.Adapter<ArticlesAdapter.DataViewHolder>() {
+class ArticlesAdapter(private val articles: ArrayList<Result>) : RecyclerView.Adapter<ArticlesAdapter.DataViewHolder>() {
 
     class DataViewHolder(private val itemBinding: GameLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bind(article: Article) {
+        fun bind(article: Result) {
             itemView.apply {
-                itemBinding.rowLBLName.text = article.body
-                Log.d("FFFF", "GamesAdapter: ${article.id}")
-                //Glide.with(itemBinding.rowIMGImage.context).load("https://images.igdb.com/igdb/image/upload/t_cover_small/" + article.id + ".jpg").into(itemBinding.rowIMGImage)
+                //itemBinding.rowLBLName.text = android.text.Html.fromHtml(article.body, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+                itemBinding.rowLBLName.text = android.text.Html.fromHtml(article.deck, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+                itemBinding.rowLBLTitle.text = article.title
+
+                val options: RequestOptions = RequestOptions()
+                    .centerCrop()
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.placeholder_error)
+
+                Glide.with(itemBinding.rowIMGImage.context).load(article.image.square_small).apply(options).into(itemBinding.rowIMGImage)
+
             }
         }
     }
@@ -34,7 +44,7 @@ class ArticlesAdapter(private val articles: ArrayList<Article>) : RecyclerView.A
         return DataViewHolder(itemBinding)
     }
 
-    fun addArticles(articles: ArrayList<Article>) {
+    fun addArticles(articles: ArrayList<Result>) {
         this.articles.apply {
             clear()
             addAll(articles)
