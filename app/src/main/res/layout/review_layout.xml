@@ -68,7 +68,7 @@
 
         </LinearLayout>
 
-        <!-- EXPANDED SECTION -->
+                            <!-- EXPANDED SECTION -->
         <LinearLayout
             android:id="@+id/review_row_expanded"
             android:layout_width="match_parent"

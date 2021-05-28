@@ -11,9 +11,8 @@ import com.classy.gamesinfo.databinding.ActivityMainBinding
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-//TODO: Implement different ViewTypes into the recyclerView to differentiate between the News/Reviews/Videos/Events and Games.
 //TODO: To get no duplicate loading issues (e.g. pressing home, than coming back to the activity) with koin and DI: https://stackoverflow.com/questions/56289929/how-to-use-koin-in-multiple-module
-//TODO: Save the State of the fragments so the application won't call the API everytime the user switches a fragment
+//TODO: Save the State of the fragments so the application won't call the API everytime the user switches a fragment, onSaveInstanceState() + local persistence (Room?)
 //TODO: Think about re-implementing the item_loading_layout.xml (Probably not)
 
 class MainActivity : AppCompatActivity() {

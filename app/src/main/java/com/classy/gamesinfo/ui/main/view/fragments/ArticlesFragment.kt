@@ -29,8 +29,6 @@ class ArticlesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState != null) {
-        }
     }
 
     override fun onCreateView(
@@ -130,7 +128,6 @@ class ArticlesFragment : Fragment() {
         articlesAdapter.apply {
             addArticles(articleAPI.results as ArrayList<ResultArticle>)
             notifyDataSetChanged()
-
         }
     }
 

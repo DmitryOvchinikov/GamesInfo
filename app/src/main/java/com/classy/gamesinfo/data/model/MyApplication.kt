@@ -4,6 +4,7 @@ import android.app.Application
 import com.classy.gamesinfo.data.modules.articlesModule
 import com.classy.gamesinfo.data.modules.networkModule
 import com.classy.gamesinfo.data.modules.reviewsModule
+import com.classy.gamesinfo.data.modules.videosModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +18,7 @@ class MyApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApplication)
-            modules(listOf(articlesModule, reviewsModule, networkModule))
+            modules(listOf(articlesModule, reviewsModule, videosModule, networkModule))
         }
     }
 }

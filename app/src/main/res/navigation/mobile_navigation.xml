@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_games"
-        android:name="com.classy.gamesinfo.ui.main.view.fragments.VideosFragment"
+        android:name="com.classy.gamesinfo.ui.main.view.fragments.GamesFragment"
         android:label="@string/title_games"
-        tools:layout="@layout/fragment_videos" />
+        tools:layout="@layout/fragment_games" />
 </navigation>
