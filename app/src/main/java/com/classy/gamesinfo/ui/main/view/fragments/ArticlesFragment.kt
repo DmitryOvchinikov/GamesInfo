@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.classy.gamesinfo.data.model.gamespot.ArticlesJsonAPI
-import com.classy.gamesinfo.data.model.gamespot.Result
+import com.classy.gamesinfo.data.model.gamespot.ArticleJsonAPI
+import com.classy.gamesinfo.data.model.gamespot.ResultArticle
 import com.classy.gamesinfo.databinding.FragmentArticlesBinding
 import com.classy.gamesinfo.ui.main.adapter.ArticlesAdapter
 import com.classy.gamesinfo.ui.main.listeners.EndlessRecyclerOnScrollListener
@@ -27,18 +27,24 @@ class ArticlesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentArticlesBinding.inflate(inflater, container, false)
 
         setupUI()
         setupObservers()
 
         return binding.root
+
     }
 
     private fun setupUI() {
@@ -72,17 +78,20 @@ class ArticlesFragment : Fragment() {
                         resource.data?.let { articles ->
                             retrieveList(articles)
                         }
-                        Log.d("FFFF", "getRecentArticles(): SUCCESS")
+                        Log.d("FFFF", "loadMoreArticles(): getRecentArticles(): SUCCESS")
                     }
                     Status.ERROR -> {
-                        Log.d("FFFF", "getRecentArticles(): " + it.message.toString())
+                        Log.d(
+                            "FFFF",
+                            "loadMoreArticles(): getRecentArticles(): " + it.message.toString()
+                        )
                         if (it.message.toString() == "HTTP 502") {
                             //TODO: Check if this doesn't crash the app
                             loadMoreArticles()
                         }
                     }
                     Status.LOADING -> {
-                        Log.d("FFFF", "getRecentArticles(): LOADING")
+                        Log.d("FFFF", "loadMoreArticles(): getRecentArticles(): LOADING")
                     }
                 }
             }
@@ -117,9 +126,9 @@ class ArticlesFragment : Fragment() {
             })
     }
 
-    private fun retrieveList(articles: ArticlesJsonAPI) {
+    private fun retrieveList(articleAPI: ArticleJsonAPI) {
         articlesAdapter.apply {
-            addArticles(articles.results as ArrayList<Result>)
+            addArticles(articleAPI.results as ArrayList<ResultArticle>)
             notifyDataSetChanged()
 
         }

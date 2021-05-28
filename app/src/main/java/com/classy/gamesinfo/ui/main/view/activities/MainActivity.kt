@@ -14,8 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 //TODO: Implement different ViewTypes into the recyclerView to differentiate between the News/Reviews/Videos/Events and Games.
 //TODO: To get no duplicate loading issues (e.g. pressing home, than coming back to the activity) with koin and DI: https://stackoverflow.com/questions/56289929/how-to-use-koin-in-multiple-module
 //TODO: Save the State of the fragments so the application won't call the API everytime the user switches a fragment
-//TODO: Find a way to scroll to the position of the expanded section from inside the ArticlesAdapter
-//TODO: Implement InfiniteScroll and the API Call whenever it scrolls to the end
+//TODO: Think about re-implementing the item_loading_layout.xml (Probably not)
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_games,
             )
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

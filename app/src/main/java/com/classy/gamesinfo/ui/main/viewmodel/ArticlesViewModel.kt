@@ -1,15 +1,9 @@
 package com.classy.gamesinfo.ui.main.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.classy.gamesinfo.data.repository.ArticlesRepository
-import com.classy.gamesinfo.ui.main.listeners.EndlessRecyclerOnScrollListener
 import com.classy.gamesinfo.utils.Resource
-import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener
 import kotlinx.coroutines.Dispatchers
 
 class ArticlesViewModel(private val articlesRepository: ArticlesRepository): ViewModel() {

@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/row_card"
+    android:id="@+id/review_row_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
@@ -29,7 +29,7 @@
             android:paddingEnd="10dp">
 
             <ImageView
-                android:id="@+id/row_IMG_image"
+                android:id="@+id/review_row_IMG_image"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:maxWidth="130dp"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/row_LBL_title"
+                    android:id="@+id/review_row_LBL_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -52,10 +52,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/row_LBL_description"
+                    android:id="@+id/review_row_LBL_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/row_LBL_title"
+                    android:layout_below="@+id/review_row_LBL_title"
                     android:layout_marginStart="5dp"
                     android:breakStrategy="high_quality"
                     android:ellipsize="end"
@@ -68,16 +68,16 @@
 
         </LinearLayout>
 
-                                        <!-- EXPANDED SECTION -->
+        <!-- EXPANDED SECTION -->
         <LinearLayout
-            android:id="@+id/row_expanded"
+            android:id="@+id/review_row_expanded"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/row_LBL_author"
+                android:id="@+id/review_row_LBL_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -87,7 +87,7 @@
                 />
 
             <TextView
-                android:id="@+id/row_LBL_published"
+                android:id="@+id/review_row_LBL_published"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -97,7 +97,7 @@
                 />
 
             <TextView
-                android:id="@+id/row_LBL_updated"
+                android:id="@+id/review_row_LBL_updated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -107,7 +107,36 @@
                 />
 
             <TextView
-                android:id="@+id/row_LBL_expandedBody"
+                android:id="@+id/review_row_LBL_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/review_row_LBL_goodPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                />
+
+            <TextView
+                android:id="@+id/review_row_LBL_badPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                />
+
+            <TextView
+                android:id="@+id/review_row_LBL_expandedBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

@@ -3,6 +3,7 @@ package com.classy.gamesinfo.data.model
 import android.app.Application
 import com.classy.gamesinfo.data.modules.articlesModule
 import com.classy.gamesinfo.data.modules.networkModule
+import com.classy.gamesinfo.data.modules.reviewsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,7 +17,7 @@ class MyApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApplication)
-            modules(listOf(articlesModule, networkModule))
+            modules(listOf(articlesModule, reviewsModule, networkModule))
         }
     }
 }

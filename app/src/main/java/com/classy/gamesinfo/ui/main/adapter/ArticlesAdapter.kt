@@ -9,27 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.classy.gamesinfo.R
-import com.classy.gamesinfo.data.model.gamespot.Result
+import com.classy.gamesinfo.data.model.gamespot.ResultArticle
 import com.classy.gamesinfo.databinding.ArticleLayoutBinding
-import com.classy.gamesinfo.databinding.ItemLoadingLayoutBinding
 
-
-class ArticlesAdapter(private val articles: ArrayList<Result>) :
+class ArticlesAdapter(private val articles: ArrayList<ResultArticle>) :
     RecyclerView.Adapter<ArticlesAdapter.BaseViewHolder<*>>() {
 
-    private object VIEW_TYPES {
-        const val ITEM = 0
-        const val LOADING = 1
-    }
+//    private object VIEW_TYPES {
+//        const val ITEM = 0
+//        const val LOADING = 1
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-        if (viewType == VIEW_TYPES.ITEM) {
-            val itemBinding = ArticleLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return ArticleViewHolder(itemBinding)
-        } else {
-            val itemBinding = ItemLoadingLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return LoadingViewHolder(itemBinding)
-        }
+        val itemBinding =
+            ArticleLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ArticleViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
@@ -39,26 +33,16 @@ class ArticlesAdapter(private val articles: ArrayList<Result>) :
                 articles[position].expanded = !articles[position].expanded
                 notifyItemChanged(position)
             }
-        } else if (holder is LoadingViewHolder) {
-            showLoadingView(holder, position)
         }
-    }
-
-    private fun showLoadingView(holder: LoadingViewHolder, position: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun getItemCount(): Int = articles.size
 
-    override fun getItemViewType(position: Int): Int {
-        return if (articles!![position] == null) VIEW_TYPES.LOADING else VIEW_TYPES.ITEM
-    }
-
     inner class ArticleViewHolder(private val itemBinding: ArticleLayoutBinding) :
-        BaseViewHolder<Result>(itemBinding.root) {
+        BaseViewHolder<ResultArticle>(itemBinding.root) {
 
         @SuppressLint("SetTextI18n")
-        override fun bind(item: Result) {
+        override fun bind(item: ResultArticle) {
             itemView.apply {
 
                 if (item.expanded) {
@@ -71,7 +55,9 @@ class ArticlesAdapter(private val articles: ArrayList<Result>) :
                     android.text.Html.fromHtml(item.deck, HtmlCompat.FROM_HTML_MODE_LEGACY)
                         .toString()
                 itemBinding.rowLBLTitle.text = item.title
-                itemBinding.rowLBLExpandedBody.text = android.text.Html.fromHtml(item.body, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+                itemBinding.rowLBLExpandedBody.text =
+                    android.text.Html.fromHtml(item.body, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        .toString()
                 itemBinding.rowLBLPublished.text = "Published: ${item.publish_date}"
                 itemBinding.rowLBLUpdated.text = "Updated: ${item.update_date}"
                 itemBinding.rowLBLAuthor.text = "By ${item.authors}"
@@ -88,17 +74,17 @@ class ArticlesAdapter(private val articles: ArrayList<Result>) :
         }
     }
 
-    inner class LoadingViewHolder(private val itemBinding: ItemLoadingLayoutBinding) :
-        BaseViewHolder<Int>(itemBinding.root) {
+//    inner class LoadingViewHolder(private val itemBinding: ItemLoadingLayoutBinding) :
+//        BaseViewHolder<Int>(itemBinding.root) {
+//
+//            override fun bind(item: Int) {
+//                itemView.apply {
+//                    itemBinding.progressBar.visibility = View.GONE
+//                }
+//            }
+//        }
 
-            override fun bind(item: Int) {
-                itemView.apply {
-                    itemBinding.progressBar.visibility = View.GONE
-                }
-            }
-        }
-
-    fun addArticles(articles: ArrayList<Result>) {
+    fun addArticles(articles: ArrayList<ResultArticle>) {
         this.articles.apply {
             addAll(articles)
         }
