@@ -10,11 +10,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
 
-    single { ApiHelper( get() ) }
-    single { provideGameSpotApi ( get() ) }
-    single { provideRetrofit ( get() ) }
+    single { ApiHelper(get()) }
+    single { provideGameSpotApi(get()) }
+    single { provideRetrofit(get()) }
     single { provideOkHttpClient() }
-    
+
 }
 
 fun provideOkHttpClient(): OkHttpClient {
@@ -24,7 +24,7 @@ fun provideOkHttpClient(): OkHttpClient {
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create()).build()
-
 }
 
-fun provideGameSpotApi(retrofit: Retrofit): GameSpotService = retrofit.create(GameSpotService::class.java)
+fun provideGameSpotApi(retrofit: Retrofit): GameSpotService =
+    retrofit.create(GameSpotService::class.java)

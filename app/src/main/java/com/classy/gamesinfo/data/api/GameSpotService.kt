@@ -2,8 +2,8 @@ package com.classy.gamesinfo.data.api
 
 import com.classy.gamesinfo.BuildConfig
 import com.classy.gamesinfo.data.model.gamespot.ArticleJsonAPI
+import com.classy.gamesinfo.data.model.gamespot.GamesJsonAPI
 import com.classy.gamesinfo.data.model.gamespot.ReviewJsonAPI
-import com.classy.gamesinfo.data.model.gamespot.Video
 import com.classy.gamesinfo.data.model.gamespot.VideoJsonAPI
 import retrofit2.http.*
 
@@ -38,4 +38,13 @@ interface GameSpotService {
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
     ): VideoJsonAPI
+
+    @GET("games/?api_key=${BuildConfig.API_KEY}")
+    suspend fun getGames(
+        @Query("format") format: String,
+        @Query("sort") sort: String,
+        @Query("limit") limit : Int,
+        @Query("offset") offset: Int,
+        @Query("filter") filter: String
+    ): GamesJsonAPI
 }

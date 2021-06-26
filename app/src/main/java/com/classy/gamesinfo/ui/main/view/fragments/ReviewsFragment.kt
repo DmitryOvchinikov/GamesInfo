@@ -129,6 +129,7 @@ class ReviewsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("FFFF", "onDestroyView()")
         _binding = null
     }
 }

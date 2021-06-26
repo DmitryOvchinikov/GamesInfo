@@ -146,6 +146,8 @@ class VideosFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("FFFF", "onDestroyView()")
+        Jzvd.releaseAllVideos() // Releasing all videos so they won't keep playing when I'm switching to another fragment.
         _binding = null
     }
 }

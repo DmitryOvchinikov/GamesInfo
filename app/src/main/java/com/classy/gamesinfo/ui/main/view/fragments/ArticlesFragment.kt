@@ -1,6 +1,7 @@
 package com.classy.gamesinfo.ui.main.view.fragments
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +16,12 @@ import com.classy.gamesinfo.ui.main.adapter.ArticlesAdapter
 import com.classy.gamesinfo.ui.main.listeners.EndlessRecyclerOnScrollListener
 import com.classy.gamesinfo.ui.main.viewmodel.ArticlesViewModel
 import com.classy.gamesinfo.utils.Status
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
+
 
 class ArticlesFragment : Fragment() {
 
-    private val articlesViewModel: ArticlesViewModel by viewModel()
+    private val articlesViewModel: ArticlesViewModel by stateViewModel()
     private lateinit var articlesAdapter: ArticlesAdapter
     private var _binding: FragmentArticlesBinding? = null
 
@@ -133,6 +135,17 @@ class ArticlesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("FFFF", "onDestroyView()")
         _binding = null
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("FFFF", "onPause()")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("FFFF", "onResume()")
     }
 }

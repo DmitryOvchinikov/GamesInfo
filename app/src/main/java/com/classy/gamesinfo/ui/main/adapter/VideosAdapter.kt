@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,7 +11,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.classy.gamesinfo.R
 import com.classy.gamesinfo.data.model.gamespot.ResultVideo
 import com.classy.gamesinfo.databinding.VideoLayoutBinding
-import java.io.IOException
 
 class VideosAdapter(private val videos: ArrayList<ResultVideo>) :
     RecyclerView.Adapter<VideosAdapter.BaseViewHolder<*>>() {
@@ -26,13 +24,6 @@ class VideosAdapter(private val videos: ArrayList<ResultVideo>) :
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         if (holder is VideosViewHolder) {
             holder.bind(videos[position])
-            holder.itemView.setOnClickListener {
-                if (videos[position].expanded) {
-
-                }
-                videos[position].expanded = !videos[position].expanded
-                notifyItemChanged(position)
-            }
         }
     }
 

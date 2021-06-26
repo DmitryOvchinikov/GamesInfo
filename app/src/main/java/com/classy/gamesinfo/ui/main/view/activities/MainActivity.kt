@@ -2,7 +2,8 @@ package com.classy.gamesinfo.ui.main.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -13,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 //TODO: To get no duplicate loading issues (e.g. pressing home, than coming back to the activity) with koin and DI: https://stackoverflow.com/questions/56289929/how-to-use-koin-in-multiple-module
 //TODO: Save the State of the fragments so the application won't call the API everytime the user switches a fragment, onSaveInstanceState() + local persistence (Room?)
-//TODO: Think about re-implementing the item_loading_layout.xml (Probably not)
+//TODO: delete mySharedPref?
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigation() {
         val navView: BottomNavigationView = viewBinding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navController = navHostFragment.navController
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(

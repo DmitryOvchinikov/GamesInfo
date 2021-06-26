@@ -9,5 +9,5 @@ val articlesModule = module {
     // a single instance of the ArticlesRepository
     single { ArticlesRepository(get()) }
 
-    viewModel { ArticlesViewModel( get() ) }
+    viewModel { ArticlesViewModel( get(), get()) }
 }
