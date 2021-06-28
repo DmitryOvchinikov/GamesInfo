@@ -6,15 +6,25 @@ import com.classy.gamesinfo.data.repository.VideosRepository
 import com.classy.gamesinfo.utils.Resource
 import kotlinx.coroutines.Dispatchers
 
-class VideosViewModel(private val videosRepository: VideosRepository): ViewModel() {
+class VideosViewModel(private val videosRepository: VideosRepository) : ViewModel() {
 
     fun getRecentVideos(format: String, sort: String, limit: Int, offset: Int) = liveData(
-        Dispatchers.IO) {
+        Dispatchers.IO
+    ) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = videosRepository.getRecentVideos(format, sort, limit, offset)))
+            emit(
+                Resource.success(
+                    data = videosRepository.getRecentVideos(
+                        format,
+                        sort,
+                        limit,
+                        offset
+                    )
+                )
+            )
         } catch (exception: Exception) {
-            emit (Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
 

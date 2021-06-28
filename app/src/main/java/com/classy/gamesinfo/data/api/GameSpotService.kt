@@ -9,9 +9,6 @@ import retrofit2.http.*
 
 interface GameSpotService {
 
-    //TODO: Implement quite a few GAMES API calls since the user can search by different values (genres, themes, franchises, release_dates etc)
-
-
     //Get all the recent articles/news from the API
     @GET("articles/?api_key=${BuildConfig.API_KEY}")
     suspend fun getRecentArticles(
@@ -39,6 +36,7 @@ interface GameSpotService {
         @Query("offset") offset: Int
     ): VideoJsonAPI
 
+    //Get games from the API
     @GET("games/?api_key=${BuildConfig.API_KEY}")
     suspend fun getGames(
         @Query("format") format: String,

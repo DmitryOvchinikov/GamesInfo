@@ -6,72 +6,88 @@
     android:animateLayoutChanges="true"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/games_TXT_chips_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/please_select_a_filter"
+        android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        />
+        android:elevation="30dp"
+        android:background="@color/white">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/games_chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:singleSelection="true"
-        app:selectionRequired="true">
-        <!-- app:checkedChip="@id/games_chip_gameTitle" -->
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/games_chip_gameTitle"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
+        <TextView
+            android:id="@+id/games_TXT_chips_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/game_title" />
+            android:text="@string/please_select_a_filter"
+            android:layout_gravity="center_horizontal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/games_chip_releaseDate"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/games_chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/release_date" />
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+            <!-- app:checkedChip="@id/games_chip_gameTitle" -->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/games_chip_genre"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/games_chip_gameTitle"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/game_title" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/games_chip_releaseDate"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/release_date" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/games_chip_genre"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/genre" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <EditText
+            android:id="@+id/games_EDT_editText"
+            android:visibility="invisible"
+            android:hint="@string/search_for_games"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/genre" />
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/purple_200"
+            android:imeOptions="actionDone"
+            android:textAlignment="center"
+            android:autofillHints="" />
 
-    </com.google.android.material.chip.ChipGroup>
 
-    <EditText
-        android:id="@+id/games_EDT_editText"
-        android:visibility="invisible"
-        android:hint="@string/search_for_games"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/purple_200"
-        android:autofillHints="" />
+    </LinearLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/games_LST_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/games_BAR_progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

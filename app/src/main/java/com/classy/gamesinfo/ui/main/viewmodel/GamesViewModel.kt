@@ -13,7 +13,17 @@ class GamesViewModel(private val gamesRepository: GamesRepository) : ViewModel()
     ) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = gamesRepository.getGames(format, sort, limit, offset, filter)))
+            emit(
+                Resource.success(
+                    data = gamesRepository.getGames(
+                        format,
+                        sort,
+                        limit,
+                        offset,
+                        filter
+                    )
+                )
+            )
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }

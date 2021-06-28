@@ -6,15 +6,25 @@ import com.classy.gamesinfo.data.repository.ReviewsRepository
 import com.classy.gamesinfo.utils.Resource
 import kotlinx.coroutines.Dispatchers
 
-class ReviewsViewModel(private val reviewsRepository: ReviewsRepository): ViewModel() {
+class ReviewsViewModel(private val reviewsRepository: ReviewsRepository) : ViewModel() {
 
     fun getRecentReviews(format: String, sort: String, limit: Int, offset: Int) = liveData(
-        Dispatchers.IO) {
+        Dispatchers.IO
+    ) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = reviewsRepository.getRecentReviews(format, sort, limit, offset)))
+            emit(
+                Resource.success(
+                    data = reviewsRepository.getRecentReviews(
+                        format,
+                        sort,
+                        limit,
+                        offset
+                    )
+                )
+            )
         } catch (exception: Exception) {
-            emit (Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
 
