@@ -57,6 +57,14 @@
                 android:checkable="true"
                 android:text="@string/genre" />
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/games_chip_franchise"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/franchise" />
+
         </com.google.android.material.chip.ChipGroup>
 
         <EditText

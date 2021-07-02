@@ -11,13 +11,14 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.classy.gamesinfo.data.model.gamespot.Franchise
 import com.classy.gamesinfo.data.model.gamespot.GamesJsonAPI
+import com.classy.gamesinfo.data.model.gamespot.Genre
 import com.classy.gamesinfo.data.model.gamespot.ResultGame
 import com.classy.gamesinfo.databinding.FragmentGamesBinding
 import com.classy.gamesinfo.ui.main.adapter.GamesAdapter
 import com.classy.gamesinfo.ui.main.viewmodel.GamesViewModel
 import com.classy.gamesinfo.utils.Status
-import org.json.JSONArray
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -32,6 +33,7 @@ class GamesFragment : Fragment() {
     private val INPUT_TYPE_DATE: Int = 0
     private val INPUT_TYPE_TEXT: Int = 1
     private val INPUT_TYPE_NORMAL: Int = 2
+    private val INPUT_TYPE_LONG_MESSAGE: Int = 3
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -52,20 +54,34 @@ class GamesFragment : Fragment() {
     private fun setupObservers(inputType: Int, text: String) {
         text.replace(' ', '%') //replacing white space so the url will work with the api call
 
-        val filter: String = if (inputType == INPUT_TYPE_DATE) {
-            val calendar: Calendar = Calendar.getInstance()
-            val currentYear = calendar.get(Calendar.YEAR)
-            val currentMonth = calendar.get(Calendar.MONTH)
-            val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
-            "release_date:$text-01-01|$currentYear-$currentMonth-$currentDay"
-        } else if (inputType == INPUT_TYPE_TEXT) {
-            "genres:$text"
-        } else {
-            "name:$text"
-        }
-        Log.d("FFFF", "" + filter)
+        var isTextAGenre= false
+        var isTextAFranchise= false
+        var sortBy = "release_date:asc"
 
-        gamesViewModel.getGames("json", "publish_date:asc", 10, gamesAdapter.itemCount, filter)
+        val filter: String = when (inputType) {
+            INPUT_TYPE_DATE -> {
+                val calendar: Calendar = Calendar.getInstance()
+                val currentYear = calendar.get(Calendar.YEAR)
+                val currentMonth = calendar.get(Calendar.MONTH)+1
+                val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+                "release_date:$text-01-01|$currentYear-$currentMonth-$currentDay"
+
+            }
+            INPUT_TYPE_TEXT -> {
+                isTextAGenre = true
+                "genres:$text"
+            }
+            INPUT_TYPE_LONG_MESSAGE -> {
+                isTextAFranchise = true
+                "franchises:$text"
+            }
+            else -> {
+                Log.d("FFFF", "" + text)
+                "name:$text"
+            }
+        }
+
+        gamesViewModel.getGames("json", sortBy, 50, gamesAdapter.itemCount, filter)
             .observe(viewLifecycleOwner, {
                 it?.let { resource ->
                     when (resource.status) {
@@ -73,7 +89,18 @@ class GamesFragment : Fragment() {
                             binding.gamesLSTRecyclerView.visibility = View.VISIBLE
                             binding.gamesBARProgressBar.visibility = View.GONE
                             resource.data?.let { games ->
-                                retrieveList(games)
+                                Log.d("FFFF", "isTextAGenre: $isTextAGenre")
+                                Log.d("FFFF", "isTextAFranchise: $isTextAFranchise")
+                                if (isTextAGenre) {
+                                    val genre= Genre(filter.removePrefix("genres:"))
+                                    Log.d("FFFF", "" + genre.name)
+                                    addGamesByGenreToAdapter(games, genre)
+                                } else if (isTextAFranchise) {
+                                    val franchise = Franchise(filter.removePrefix("franchises"))
+                                    addGamesByFranchiseToAdapter(games, franchise)
+                                } else {
+                                    addGamesToAdapter(games)
+                                }
                             }
                             Log.d("FFFF", "getGames(): SUCCESS")
                         }
@@ -92,9 +119,23 @@ class GamesFragment : Fragment() {
             })
     }
 
-    private fun retrieveList(gamesAPI: GamesJsonAPI) {
+    private fun addGamesToAdapter(gamesAPI: GamesJsonAPI) {
         gamesAdapter.apply {
             addGames(gamesAPI.results as ArrayList<ResultGame>)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun addGamesByGenreToAdapter(gamesAPI: GamesJsonAPI, genre: Genre) {
+        gamesAdapter.apply {
+            addGamesByGenre(gamesAPI.results as ArrayList<ResultGame>, genre)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun addGamesByFranchiseToAdapter(gamesAPI: GamesJsonAPI, franchise: Franchise) {
+        gamesAdapter.apply {
+            addGamesByFranchise(gamesAPI.results as ArrayList<ResultGame>, franchise)
             notifyDataSetChanged()
         }
     }
@@ -115,10 +156,11 @@ class GamesFragment : Fragment() {
                 // If a checked chip exists, show the edit text
                 binding.gamesEDTEditText.visibility = View.VISIBLE
                 if (resources.getResourceName(chipGroup.checkedChipId).contains("Date")) {
-                    // if the checked chip is release date - change input accordingly
                     binding.gamesEDTEditText.inputType = InputType.TYPE_CLASS_DATETIME
                 } else if (resources.getResourceName(chipGroup.checkedChipId).contains("genre")) {
                     binding.gamesEDTEditText.inputType = InputType.TYPE_CLASS_TEXT
+                } else if (resources.getResourceName(chipGroup.checkedChipId).contains("franchise")) {
+                    binding.gamesEDTEditText.inputType = InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE
                 } else {
                     binding.gamesEDTEditText.inputType = InputType.TYPE_TEXT_VARIATION_WEB_EDIT_TEXT
                 }
@@ -131,6 +173,8 @@ class GamesFragment : Fragment() {
                     inputType = INPUT_TYPE_DATE
                 } else if (binding.gamesEDTEditText.inputType == InputType.TYPE_CLASS_TEXT) {
                     inputType = INPUT_TYPE_TEXT
+                } else if (binding.gamesEDTEditText.inputType == InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE) {
+                    inputType = INPUT_TYPE_LONG_MESSAGE
                 } else {
                     inputType = INPUT_TYPE_NORMAL
                 }

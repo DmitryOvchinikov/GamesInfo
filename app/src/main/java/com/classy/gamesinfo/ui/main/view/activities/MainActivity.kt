@@ -12,10 +12,6 @@ import com.classy.gamesinfo.databinding.ActivityMainBinding
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-//TODO: To get no duplicate loading issues (e.g. pressing home, than coming back to the activity) with koin and DI: https://stackoverflow.com/questions/56289929/how-to-use-koin-in-multiple-module
-//TODO: Save the State of the fragments so the application won't call the API everytime the user switches a fragment, onSaveInstanceState() + local persistence (Room?)
-//TODO: delete mySharedPref?
-
 class MainActivity : AppCompatActivity() {
 
     //ViewBinding

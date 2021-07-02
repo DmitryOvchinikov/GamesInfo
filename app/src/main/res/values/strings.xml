@@ -16,4 +16,5 @@
     <string name="genre">Genre</string>
     <string name="please_select_a_filter">Please select a filter:</string>
     <string name="search_for_games">Search for games:</string>
+    <string name="franchise">Franchise</string>
 </resources>

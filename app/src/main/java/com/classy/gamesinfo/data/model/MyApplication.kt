@@ -11,7 +11,6 @@ class MyApplication : Application() {
         super.onCreate()
 
         //Declaring a singleton instance of the SP
-        MySharedPreferences.initHelper(this)
         startKoin {
             androidLogger()
             androidContext(this@MyApplication)
